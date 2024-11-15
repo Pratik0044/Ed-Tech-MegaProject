@@ -5,6 +5,8 @@ const otpGenerator = require("otp-generator")
 const emailValidator = require("email-validator")
 const bcrypt = require("bcrypt")
 const Profile = require("../models/Profile")
+const jwt = require("jsonwebtoken")
+require('dotenv').config();
 // sendOTP
 exports.sendOTP = async (req,res)=>{
     try{
@@ -176,15 +178,55 @@ exports.signUp = async (req,res)=>{
 exports.logIn =async (req,res)=>{
     try{
         // fetch data from request ki body
+        const {email,pass}  = req.body;
 
         // validate
-
+        if(!email || !pass){
+            return res.status(400).json({
+                success:false,
+                message:"Each fields is required"
+            })
+        }
         // find user exist or not
-
+        const userData = await User.findOne({email}).populate("additionalDetails")
         // if not exist return respose user not found try to signUP firstly
-
+        if(!userData){
+            console.log("user not exist:");
+            
+            return res.status(400).json({
+                success:false,
+                message:"User not registered, Try to register first"
+            })
+        }
         // else
         // verify the given password with our Db password
+        
+        if(await bcrypt.compare(pass,userData.password)){
+            const payload = {
+                email: userData.email,
+                id: User._id,
+                role: user.accountType,
+            }
+            const token = jwt.sign(payload, process.env.JWT_SECRET,{
+                expiresIn:"2h"
+            })
+            userData.token = token
+            userData.password = undefined;
+
+            // create cookie and send response
+            const options = {
+                expires: new Date(Date.now()+ 3*24*60*1000),
+                httpOnly:true
+
+            }
+            res.cookie("token",token,options).status(200).json({
+                success:true,
+                userData,
+                token,
+                message:"User LogedIn successfully"
+            })
+        }
+        // Generate JWT token
 
         // return res
     }catch(er){
