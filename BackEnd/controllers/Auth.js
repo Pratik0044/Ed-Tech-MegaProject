@@ -52,8 +52,8 @@ exports.sendOTP = async (req,res)=>{
         const otpPayload = {email,otp}
         // create an entry in DB
 
-        const optUpload = await OTP.create({otpPayload})
-        console.log("OTP Body:",optUpload);
+        const otpUpload = await OTP.create({otpPayload})
+        console.log("OTP Body:",otpUpload);
 
         return res.status(200).json({
             success:true,
@@ -122,7 +122,7 @@ exports.signUp = async (req,res)=>{
         
         // else
         // find most recent OTP stored for the user
-        const recentOTP = await OTP.find({email}.sort({createdAT:-1}).limit(1))
+        const recentOTP = await OTP.find({email}.sort({createdAt:-1}).limit(1))
         console.log("Recent OTP : ", recentOTP);
         
         // validate OTP 
@@ -178,10 +178,10 @@ exports.signUp = async (req,res)=>{
 exports.logIn =async (req,res)=>{
     try{
         // fetch data from request ki body
-        const {email,pass}  = req.body;
+        const {email,password}  = req.body;
 
         // validate
-        if(!email || !pass){
+        if(!email || !password){
             return res.status(400).json({
                 success:false,
                 message:"Each fields is required"
@@ -201,12 +201,13 @@ exports.logIn =async (req,res)=>{
         // else
         // verify the given password with our Db password
         
-        if(await bcrypt.compare(pass,userData.password)){
+        if(await bcrypt.compare(password,userData.password)){
             const payload = {
                 email: userData.email,
                 id: User._id,
                 role: user.accountType,
             }
+            // Generate JWT token
             const token = jwt.sign(payload, process.env.JWT_SECRET,{
                 expiresIn:"2h"
             })
@@ -226,15 +227,44 @@ exports.logIn =async (req,res)=>{
                 message:"User LogedIn successfully"
             })
         }
-        // Generate JWT token
-
+        
         // return res
+        else{
+            return res.status(401).json({
+                success:false,
+                message:"Password has not matched, Please try with correct password."
+            })
+        }
+    
+
     }catch(er){
         console.log("Something went worn in Login: ",er);
-        return res.status(400).json({
+        return res.status(500).json({
             success:false,
             message:"LogIn attenmp fail, Try again later."
         })
     }
 }
 // ChangePassword
+exports.changePassword = async (req,res)=>{
+    // fetch the email from req ki body
+    
+   const {oldPassword,newPassword,confirmPassword} = req.body;
+   if(!oldPassword || !newPassword || !confirmPassword){
+        return res.status(500).json({
+            success:false,
+            message:"Please enter all feilds."
+        })
+   }
+    
+   else if(newPassword !== confirmPassword){
+    return res.status(500).json({
+        success:false,
+        message:"New and Confirm Password should be same."
+    })
+   }
+   const password = newPassword;
+   if( await bcrypt.compare(oldPassword,User)){
+    
+   }
+}
