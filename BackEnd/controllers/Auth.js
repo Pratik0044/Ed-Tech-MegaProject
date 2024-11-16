@@ -204,8 +204,8 @@ exports.logIn =async (req,res)=>{
         if(await bcrypt.compare(password,userData.password)){
             const payload = {
                 email: userData.email,
-                id: User._id,
-                role: user.accountType,
+                id: userData._id,
+                accountType: userData.accountType,
             }
             // Generate JWT token
             const token = jwt.sign(payload, process.env.JWT_SECRET,{
@@ -257,14 +257,6 @@ exports.changePassword = async (req,res)=>{
         })
    }
     
-   else if(newPassword !== confirmPassword){
-    return res.status(500).json({
-        success:false,
-        message:"New and Confirm Password should be same."
-    })
-   }
-   const password = newPassword;
-   if( await bcrypt.compare(oldPassword,User)){
-    
-   }
+   
+   
 }
