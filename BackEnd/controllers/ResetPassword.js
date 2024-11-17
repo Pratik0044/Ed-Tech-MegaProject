@@ -44,9 +44,40 @@ exports.resetPasswordToken = async (req, res) => {
   } catch (er) {
     return res.status(400).json({
         success:false,
-        message:"something went wrong, Link cann't send for reset password."
+        message:"something went wrong, While sending reset  the password link."
     })
   }
 };
 
 // reset password
+
+exports.resetPassword = async (req,res)=>{
+    try{
+        // fetch the data from req ki body
+        const {newPassword, confirmPassword} = req.body
+
+        // validate
+        if(!newPassword || !confirmPassword || newPassword !== confirmPassword){
+            return res.status(413).json({
+                status:false,
+                message:'Please enter correct and same data.'
+            })
+        }
+
+        //get userDetailes from DB using token
+        
+
+        // token time check
+
+        // hash password
+
+        // update password
+
+        //return res
+    }catch(er){
+        return res.status(400).json({
+            success:false,
+            message:"something went wrong, While reseting the password."
+        })
+    }
+}
