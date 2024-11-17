@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const bcrypt = require("bcrypt")
 const mailSender = require("../utils/mailSender");
 
 // reset password token
@@ -54,8 +55,7 @@ exports.resetPasswordToken = async (req, res) => {
 exports.resetPassword = async (req,res)=>{
     try{
         // fetch the data from req ki body
-        const {newPassword, confirmPassword} = req.body
-
+        const {newPassword, confirmPassword, token } = req.body
         // validate
         if(!newPassword || !confirmPassword || newPassword !== confirmPassword){
             return res.status(413).json({
@@ -65,15 +65,33 @@ exports.resetPassword = async (req,res)=>{
         }
 
         //get userDetailes from DB using token
-        
-
+        const user = await User.findOne({token:token})
+        //if no entry
+        if(!user){
+            return res.status(413).json({
+                status:false,
+                message:'User not registered. | token is invalid'
+            })
+        }
         // token time check
-
+        if(user.resetPassswordExpires < Date.now()){
+            return res.status(413).json({
+                status:false,
+                message:'Your token is expired, please try again later'
+            })
+        }
         // hash password
-
+        const hashedPassword = await bcrypt.hash(newPassword,10)
         // update password
-
+        await User.findOneAndUpdate({token:token},
+                                    {password:hashedPassword},
+                                    {new:true}
+        );
         //return res
+        return res.status(200).json({
+            success:true,
+            message:"Your Passwrd Reset Successfully"
+        })
     }catch(er){
         return res.status(400).json({
             success:false,
