@@ -31,6 +31,7 @@ exports.auth = async (req,res,next)=>{
                 message:"Token verification failed"
             })
         }
+        next()
 
     }catch(er){
             return res.status(400).json({
@@ -49,6 +50,7 @@ exports.isStudent = async (req,res,next)=>{
                 message:"This is protected rout for student only."
             })
         }
+        next()
     }catch(er){
         return res.status(500).json({
             success:false,
@@ -67,6 +69,7 @@ exports.isInstructor = async (req,res,next)=>{
                 message:"This is protected rout for Instructor only."
             })
         }
+        next()
     }catch(er){
         return res.status(500).json({
             success:false,
@@ -84,6 +87,7 @@ exports.isAdmin = async (req,res,next)=>{
                 message:"This is protected rout for Admin only."
             })
         }
+        next()
     }catch(er){
         return res.status(500).json({
             success:false,
