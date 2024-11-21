@@ -4,7 +4,7 @@ const Tag = require("../models/Tags");
 const User = require("../models/User");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
 const isInstructor = require("../middleWare");
-
+// create course
 exports.createCourse = async (req, res) => {
     try {
         const { courseName, courseDescription, whatYouWillLearn, price, tag } =
@@ -92,3 +92,27 @@ exports.createCourse = async (req, res) => {
 };
 
 // fetch courses
+exports.getAllCourse = async (req,res) => {
+    try{
+        const user = req.user.id;
+        if(!user){
+            return res.status(400).json({
+                success:false,
+                message:"User not found"
+            })
+        }
+
+        const allCourse = await Course.find({},{courseName:true,
+                                                price:true,
+                                                thumbnail:true,
+                                                instructor:true,
+                                                ratingAndReview:true,
+                                                studentsEnrolled:true
+        }).populate("instructor").exec();
+    }catch(er){
+        return res.status(400).json({
+            success: false,
+            message: "Something went wrong while fetching the courese for YOu!",
+        });
+    }
+}
