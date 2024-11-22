@@ -1,4 +1,4 @@
-const Category = require("../models/Categorys")
+const Category = require("../models/Category")
 
 
 // create Category handler
