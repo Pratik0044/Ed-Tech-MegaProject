@@ -256,7 +256,21 @@ exports.changePassword = async (req,res)=>{
             message:"Please enter all feilds."
         })
    }
-    
    
+   if(newPassword !== confirmPassword){
+    return res.status(401).json({
+        success:false,
+        message:"Please fill new password and confirm password as same"
+    })
+   }
+
+   const userId = req.user.id
+   const user = await User.findById({userId})
+   if(!bcrypt.compare(oldPassword,user.password)){
+        return res.status(400).json({
+            success:false,
+            message:"Your old Password is incorrect please try again"
+        })
+   }
    
 }
