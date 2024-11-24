@@ -249,7 +249,8 @@ exports.logIn =async (req,res)=>{
 exports.changePassword = async (req,res)=>{
     // fetch the email from req ki body
     
-   const {oldPassword,newPassword,confirmPassword} = req.body;
+   try{
+    const {oldPassword,newPassword,confirmPassword} = req.body;
    if(!oldPassword || !newPassword || !confirmPassword){
         return res.status(500).json({
             success:false,
@@ -271,6 +272,20 @@ exports.changePassword = async (req,res)=>{
             success:false,
             message:"Your old Password is incorrect please try again"
         })
+   }
+
+   await User.findOneAndUpdate({userId},{password:newPassword});
+
+   return res.status(200).json({
+    success:true,
+    message:"Your password reset Successfully! Thank You to visit."
+   })
+   }
+   catch(er){
+    return res.status(400).json({
+        success:false,
+        message:"Something Went wrong while reseting the password"
+    })
    }
    
 }
