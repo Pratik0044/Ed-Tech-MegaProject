@@ -18,7 +18,7 @@
     "email-validator": "^2.0.4",
     "express": "^4.21.1",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.8.1",
+    "mongoose": "^8.8.3",
     "nodemailer": "^6.9.16",
     "nodemon": "^3.1.7",
     "otp-generator": "^4.0.1"
