@@ -71,3 +71,36 @@ exports.deleteProfile = async (req, res) => {
             });
     }
 }
+
+// get profile
+exports.getUserDetails = async (req, res) => {
+    try{
+        // get user id
+        const userId = req.user._id;
+        // validation
+        let userDetails = await User.findById(userId);
+        if(!userDetails){
+            return res.status(400).json({
+                success:false,
+                message:"User not found."
+            });
+        }
+
+        // find profile
+        userDetails = userDetails.populate('additionalDetails').exec();
+        // const profileId = userDetails.additionalDetails;
+        // const profileDetails = await Profile.findById(profileId);
+        // return response
+        return res.status(200).json({
+            success:true,
+            message:"Profile fetched successfully",
+            userDetails
+        });
+    }catch(er){
+        return res.status(500).json(
+            {
+                success:false,
+                message: "Somthing went wrong while getting profile"
+            });
+    }
+}
