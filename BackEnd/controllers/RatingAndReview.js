@@ -1,6 +1,6 @@
 const RatingAndReview = require("../models/RatingAndReview");
 const Course = require("../models/Course");
-const User = require("../models/User");
+
 
 // Create a new Rating 
 
@@ -63,7 +63,40 @@ exports.createRating = async (req,res) => {
 
 exports.getAverageRating = async (req,res) => {
     try {
-        // get course id from request params
+        // get course id from request
+        const courseId = req.body.courseId;
+        // calculate average rating of a course
+        const result = await RatingAndReview.aggregate([
+            {
+                $match:{
+                    course: new mongoose.Types.ObjectId(courseId),
+                }
+            },
+            {
+                $group:{
+                    _id:null,
+                    averageRating:{$avg:"$rating"},
+                }
+            }
+        ]);
+        // return rating
+        if(result.length > 0){
+            return res.status(200).json({
+                success:true,
+                data:result[0].averageRating,
+                averageRating:result[0].averageRating,
+            });
+        }
+
+        // if no rating found
+        return res.status(200).json({
+            success:true,
+            data:0,
+            averageRating:0,
+        });
+
+
+
     } catch (error) {
         return res.status(500).json({
             error:err.message,
@@ -75,4 +108,33 @@ exports.getAverageRating = async (req,res) => {
     }
 }
 
-// get all Rating of a course
+// get all Rating and review of a course
+
+exports.getAllRatingAndReview = async (req,res) => {
+    try {
+        const allReview = await RatingAndReview.find({})
+                                .sort({rating:"desc"})
+                                .populate({
+                                    path:"user",
+                                    select:"firstName lastName email image",
+                                })
+                                .populate({
+                                    path:"course",
+                                    select :"courseName",
+                                })
+                                .exec();
+
+        return res.status(200).json({
+            success:true,
+            data:ratingAndReview,
+            message:"All rating and review of a course fetched successfully",
+        });
+    } catch (error) {
+        return res.status(500).json({
+            error:err.message,
+            success:false,
+            message:"Something went wrong while getting all rating and review of a course"
+
+        });
+    }
+}
