@@ -5,6 +5,7 @@ import { FaArrowRight } from "react-icons/fa";
 import HighlightText from '../components/core/HomePage/HighlightText';
 import { CTAButton } from '../components/core/HomePage/CTAButton';
 import Banner from '../assets/Images/banner.mp4'
+import CodeBlocks from '../components/core/HomePage/CodeBlocks';
 
 export default function Home() {
   return (
@@ -51,6 +52,38 @@ export default function Home() {
                 </video>
             </div>
 
+            {/* code section 1*/}
+            <div>
+                <CodeBlocks 
+                position={"flex-row"} 
+                heading={
+                    <div className='text-4xl font-semibold'>
+                        Unloack Your <HighlightText text={"Coding Potential"}/>
+                        with our online courses.
+                    </div>
+                }
+                subheading={
+                        "Our courses are designed and taught by industry experts who have years of experience in coding and are passionate about sharing their knowledge with you."
+                }
+                ctabtn1={{
+                    btnText: "Try it yourself",
+                    linkto:"/signup",
+                    active:"true"
+                }}
+                ctabtn2={{
+                    btnText: "Learn More",
+                    linkto:"/login",
+                    active:"false"
+                }}
+
+                codeblock={""
+                }
+
+                />
+
+            </div>
+
+
         </div>
         {/* Section 2 */}
 
@@ -61,3 +94,8 @@ export default function Home() {
     </div>
   )
 }
+
+
+
+
+
