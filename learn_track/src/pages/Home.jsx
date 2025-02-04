@@ -8,6 +8,8 @@ import Banner from '../assets/Images/banner.mp4'
 import CodeBlocks from '../components/core/HomePage/CodeBlocks';
 import TimeLineSection from "../components/core/HomePage/TimeLineSection"
 import LearningLanguageSection from '../components/core/HomePage/LearningLanguageSection';
+import InstructoreSection from '../components/core/HomePage/InstructoreSection'
+import RatingAndReviewSection from '../components/core/HomePage/RatingAndReviewSection'
 
 export default function Home() {
   return (
@@ -158,6 +160,12 @@ export default function Home() {
         </div>
 
         {/* Section 3 */}
+        <div className='w-11/12 mx-auto max-w-maxContent flex flex-col items-center justify-between gap-8
+        first-letter bg-richblue-900 text-white'>
+            <InstructoreSection/>
+            <RatingAndReviewSection/>
+
+        </div>
         
 
         {/* Footer */}
