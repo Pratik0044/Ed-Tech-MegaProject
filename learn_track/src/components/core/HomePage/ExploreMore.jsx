@@ -34,7 +34,7 @@ function ExploreMore() {
                     return (
                         <div
                         className={`text-[16px] flex flex-row  items-center gap-2 
-                            ${currentTab==element 
+                            ${currentTab===element 
                                 ? "bg-richblack-900 text-richblack-5 font-medium " 
                                 : " text-richblack-200 "
                              } rounded-full transition-all duration-200 cursor-pointer hover:bg-richblue-900 
@@ -52,14 +52,15 @@ function ExploreMore() {
         <div className='lg:h-[200px]'>
 
             {/* course card ka group */}
-        <div className='flex flex-row absolute gap-5 justify-between w-full'> 
+        <div className='flex flex-row  gap-5 justify-between w-full items-center '> 
             {
                 courses.map((element,index)=>{
                     return (
                         <CourseCard key={index} 
                          cardData={element}
                           currentCard={currentCard}
-                          setCurrentCard={setCurrentCard} />
+                          setCurrentCard={setCurrentCard} 
+                        />
                     )
                 })
             }
