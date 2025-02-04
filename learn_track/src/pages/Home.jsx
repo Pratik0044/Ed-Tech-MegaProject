@@ -42,7 +42,7 @@ export default function Home() {
                 <CTAButton active={false} linkto={"/signup"}>Book a Demo</CTAButton>
             </div>
 
-            <div className='shadow-blue-200  mx-3 my-14 '>
+            <div className=' mx-3 my-14 shadow-[12px_12px] shadow-richblack-50'>
                 <video 
                 muted 
                 loop
@@ -55,9 +55,9 @@ export default function Home() {
             {/* code section 1*/}
             <div>
                 <CodeBlocks 
-                position={"flex-row"} 
+                position={"lg:flex-row"} 
                 heading={
-                    <div className='text-4xl font-semibold'>
+                    <div className='text-[36px] font-semibold'>
                         Unloack Your <HighlightText text={"Coding Potential"}/>
                         with our online courses.
                     </div>
@@ -68,25 +68,65 @@ export default function Home() {
                 ctabtn1={{
                     btnText: "Try it yourself",
                     linkto:"/signup",
-                    active:"true"
+                    active:true
                 }}
                 ctabtn2={{
                     btnText: "Learn More",
                     linkto:"/login",
-                    active:"false"
+                    active:false
                 }}
 
-                codeblock={""
+                codeblock={`<!Doctype html>\n<html>\n<head><title rel='stylsheet'\n href='style.css'/>\n</head>\n<body><h1>Learn_track</h1>
+                    <a href="/one">One</a>\n<a href="/two">Two</a>\n<p>This is edtech plateform.</p>\n</body>\n</html> `
                 }
-
+                codeColor={'text-yellow-25'}
                 />
 
             </div>
+            {/* Code section 2 */}
+            <div>
+                <CodeBlocks 
+                position={"lg:flex-row-reverse"} 
+                heading={
+                    <div className='text-[36px] font-semibold'>
+                        
+                        Start <HighlightText text={"Coding in second."}/>
+                    </div>
+                }
+                subheading={
+                        "Go ahead, give it a try. Our hands-on learning environment means you'll be writing real code from your very first lesson."
+                }
+                ctabtn1={{
+                    btnText: "Continue Lesson",
+                    linkto:"/signup",
+                    active:true
+                }}
+                ctabtn2={{
+                    btnText: "Learn More",
+                    linkto:"/login",
+                    active:false
+                }}
+
+                codeblock={`<!Doctype html>\n<html>\n<head><title rel='stylsheet'\n href='style.css'/>\n</head>\n<body><h1>Learn_track</h1>
+                    <a href="/one">One</a>\n<a href="/two">Two</a>\n<p>This is edtech plateform.</p>\n</body>\n</html> `
+                }
+                codeColor={'text-yellow-25'}
+                />
+
+            </div>
+            
 
 
         </div>
         {/* Section 2 */}
-
+        <div>
+            <div>
+                <div>
+                    Unlock the <HighlightText text={'Power of Code'}/>
+                </div>
+            </div>
+        </div>
+    
         {/* Section 3 */}
 
         {/* Footer */}

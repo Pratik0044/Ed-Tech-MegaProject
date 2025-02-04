@@ -7,6 +7,7 @@ function HighlightText({text}) {
     '> 
         {" "}
         {text}
+        {" "}
     </span>
   )
 }
