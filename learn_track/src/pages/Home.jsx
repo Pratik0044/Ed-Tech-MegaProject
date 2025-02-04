@@ -10,6 +10,7 @@ import TimeLineSection from "../components/core/HomePage/TimeLineSection"
 import LearningLanguageSection from '../components/core/HomePage/LearningLanguageSection';
 import InstructoreSection from '../components/core/HomePage/InstructoreSection'
 import RatingAndReviewSection from '../components/core/HomePage/RatingAndReviewSection'
+import ExploreMore from '../components/core/HomePage/ExploreMore'
 
 export default function Home() {
   return (
@@ -46,7 +47,7 @@ export default function Home() {
                 <CTAButton active={false} linkto={"/signup"}>Book a Demo</CTAButton>
             </div>
 
-            <div className=' mx-3 my-14 shadow-[12px_12px] shadow-richblack-50'>
+            <div className=' mx-3 my-14 shadow-[20px_20px] shadow-richblack-50'>
                 <video 
                 muted 
                 loop
@@ -118,6 +119,9 @@ export default function Home() {
                 />
 
             </div>
+
+
+            <ExploreMore/>
             
 
 
@@ -161,14 +165,21 @@ export default function Home() {
 
         {/* Section 3 */}
         <div className='w-11/12 mx-auto max-w-maxContent flex flex-col items-center justify-between gap-8
-        first-letter bg-richblue-900 text-white'>
+        first-letter bg-richblack-900 text-white'>
             <InstructoreSection/>
+            <h1 className='text-white font-semibold mt-20 mb-10 text-4xl text-center'>Review from other learners</h1>
             <RatingAndReviewSection/>
 
         </div>
         
 
         {/* Footer */}
+        <div>
+            <div className='flex '>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
         
     </div>
   )
