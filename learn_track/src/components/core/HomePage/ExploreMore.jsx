@@ -52,7 +52,7 @@ function ExploreMore() {
         <div className='lg:h-[200px]'>
 
             {/* course card ka group */}
-        <div className='flex flex-row '> 
+        <div className='flex flex-row absolute gap-5 justify-between w-full'> 
             {
                 courses.map((element,index)=>{
                     return (
