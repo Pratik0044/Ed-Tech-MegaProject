@@ -11,6 +11,7 @@ import LearningLanguageSection from '../components/core/HomePage/LearningLanguag
 import InstructoreSection from '../components/core/HomePage/InstructoreSection'
 import RatingAndReviewSection from '../components/core/HomePage/RatingAndReviewSection'
 import ExploreMore from '../components/core/HomePage/ExploreMore'
+import Footer from '../components/core/HomePage/Footer'
 
 export default function Home() {
   return (
@@ -84,7 +85,7 @@ export default function Home() {
                 codeblock={`<!Doctype html>\n<html>\n<head><title rel='stylsheet'\n href='style.css'/>\n</head>\n<body><h1>Learn_track</h1>
                     <a href="/one">One</a>\n<a href="/two">Two</a>\n<p>This is edtech plateform.</p>\n</body>\n</html> `
                 }
-                codeColor={'text-yellow-25'}
+                codeColor={'text-caribbeangreen-25'}
                 />
 
             </div>
@@ -115,7 +116,7 @@ export default function Home() {
                 codeblock={`<!Doctype html>\n<html>\n<head><title rel='stylsheet'\n href='style.css'/>\n</head>\n<body><h1>Learn_track</h1>
                     <a href="/one">One</a>\n<a href="/two">Two</a>\n<p>This is edtech plateform.</p>\n</body>\n</html> `
                 }
-                codeColor={'text-yellow-25'}
+                codeColor={'text-caribbeangreen-25'}
                 />
 
             </div>
@@ -174,12 +175,7 @@ export default function Home() {
         
 
         {/* Footer */}
-        <div>
-            <div className='flex '>
-                <div></div>
-                <div></div>
-            </div>
-        </div>
+        <Footer/>
         
     </div>
   )
