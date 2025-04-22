@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <div>
         {/* Section 1 */}
-        <div className='relative mx-auto max-w-maxContent flex flex-col w-11/12 items-center text-white
+        <div className='mt-10 relative mx-auto max-w-maxContent flex flex-col w-11/12 items-center text-white
          justify-between '>
             <Link to={"/signup"}>
                 <div className='group mt-16 p-1 rounded-full mx-auto bg-richblack-800 font-bold text-richblack-200 

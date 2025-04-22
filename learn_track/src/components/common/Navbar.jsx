@@ -13,7 +13,7 @@ function Navbar() {
 
   return (
     <>
-        <div  className='h-14 flex items-center justify-center border-b-[1px] border-b-richblack-600'>
+        <div  className="fixed top-0 left-0 w-full z-50 h-14 flex items-center justify-center border-b border-richblack-600 bg-richblack-900">
             <div className='w-11/12 flex max-w-maxContent items-center justify-between'>
             <Link to="/" >
                 <img src={logo} alt=""  width={160} height={42}/>    
