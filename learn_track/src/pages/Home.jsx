@@ -11,7 +11,7 @@ import LearningLanguageSection from '../components/core/HomePage/LearningLanguag
 import InstructoreSection from '../components/core/HomePage/InstructoreSection'
 import RatingAndReviewSection from '../components/core/HomePage/RatingAndReviewSection'
 import ExploreMore from '../components/core/HomePage/ExploreMore'
-import Footer from '../components/core/HomePage/Footer'
+import Footer from '../components/common/Footer'
 
 export default function Home() {
   return (
